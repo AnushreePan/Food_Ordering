@@ -1,0 +1,102 @@
+﻿@{
+    ViewData["Title"] = "ProductsForm";
+    Layout = "_LayoutAdmin";
+}
+@model Food_Ordering.Areas.Products.Models.ProductsModel
+
+<!-- Success-color Breadcrumb card start -->
+<div class="card borderless-card">
+    <div class="card-block success-breadcrumb">
+        <div class="breadcrumb-header">
+            <h5> Product </h5>
+        </div>
+        <div class="page-header-breadcrumb">
+            <ul class="breadcrumb-title">
+                <li class="breadcrumb-item">
+                    <a href="#!">
+                        <i class="icofont icofont-home"></i>
+                    </a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#!">Products</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a href="#!">ProductsForm</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Success-color Breadcrumb card end -->
+<!-- Page body start -->
+<div class="page-body">
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- Basic Form Inputs card start -->
+            <div class="card">
+
+                <div class="card-block">
+                    <h1 class="sub-title" style=" font-size: 20px;"> Product </h1>
+                    <h1>@TempData["ProductInsertMsg"]</h1>
+                    <form method="post" asp-area="Products" enctype="multipart/form-data" asp-controller="Products" asp-action="Save">
+                        @Html.HiddenFor(x=>x.ProductId)
+                        @Html.HiddenFor(x=>x.ImageUrl)
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Product Name</label>
+                            <div class="col-sm-10">
+                                <input type="text"
+                                       class="form-control form-control-round"
+                                       placeholder="Enter Name"
+                                       asp-for="ProductName">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Description</label>
+                            <div class="col-sm-10">
+                                <textarea rows="3" cols="5"
+                                          class="form-control form-control-round"
+                                          placeholder="Default textarea"
+                                          asp-for="Description">
+                                </textarea>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Price</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-round"
+                                       placeholder="₹" asp-for="Price">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Quantity</label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control form-control-round"
+                                       placeholder="Enter Number Only" asp-for="Quantity">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Image Url</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control form-control-round" asp-for="File">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label">Category Name</label>
+                            <div class="col-sm-10">
+                                <select class="form-control form-control-round" asp-for="CategoryId" asp-items="@(new SelectList(ViewBag.CategoryList,"CategoryId","CategoryName"))">
+                                    <option value="">Select Category</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- button Rounded -->
+                        <button class="btn btn-primary btn-round" type="submit">Save</button>
+                        <a class="btn btn-danger btn-round" style="color: white" asp-area="Products" asp-controller="Products" asp-action="Index">Cancel</a>
+
+                    </form>
+                </div>
+            </div>
+            <!-- Basic Form Inputs card end -->
+        </div>
+    </div>
+</div>
+<!-- Page body end -->

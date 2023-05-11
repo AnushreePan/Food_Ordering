@@ -1,0 +1,98 @@
+﻿@{
+    ViewData["Title"] = "CategoryList";
+    Layout = "_LayoutAdmin";
+}
+<style>
+    .img {
+        width: 60px;
+        height: 60px;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+</style>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css">
+@using System.Data
+@model DataTable
+
+<!-- Info-color Breadcrumb card start -->
+<div class="card borderless-card">
+    <div class="card-block info-breadcrumb">
+        <div class="breadcrumb-header">
+            <h4 style="color: black"> Category </h4>
+        </div>
+        <div class="page-header-breadcrumb">
+            <a class="btn btn-primary btn-round" asp-area="Category" asp-controller="Category" asp-action="Add"><i class="ti-plus"></i>Add Category</a>
+        </div>
+    </div>
+</div>
+<!-- Info-color Breadcrumb card end -->
+<!-- Basic table card start -->
+<div class="card">
+    <div class="card-header">
+        <h1 style="font-size: 20px">Category Information</h1>
+        <div class="card-header-right">
+            <ul class="list-unstyled card-option">
+                <li><i class="icofont icofont-simple-left "></i></li>
+                <li><i class="icofont icofont-maximize full-card"></i></li>
+                <li><i class="icofont icofont-minus minimize-card"></i></li>
+                <li><i class="icofont icofont-refresh reload-card"></i></li>
+                <li><i class="icofont icofont-error close-card"></i></li>
+            </ul>
+        </div>
+    </div>
+    <div class="card-block table-border-style">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Category Id</th>
+                        <th>Category Name</th>
+                        <th>Image Url</th>
+                        <th class="text-center">Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @foreach (DataRow dr in Model.Rows)
+                        {
+                        <tr>
+                            <td>@dr["CategoryId"]</td>
+                            <td>@dr["CategoryName"]</td>
+                            <td><img src=@dr["ImageUrl"] class="img" alt="img"></td>
+                            <td class="text-center">@Convert.ToDateTime(dr["CreatedDate"]).ToString("dd-MM-yyyy hh:mm:ss")</td>
+                            <td>
+                                <form method="post" asp-controller="Category" asp-action="Delete">
+                                    <input type="hidden" name="CategoryId" value=" @Convert.ToInt32(dr["CategoryId"].ToString())">
+                                    <a asp-area="Category" asp-controller="Category" asp-route-categoryid="@Convert.ToInt32(dr["CategoryId"])" asp-action="Add">
+                                        <span class="btn btn-primary btn-round text-center" style="background-color:  #4386FF; padding: 6px 6px;"><i class="ti-pencil-alt"></i></span>
+                                    </a>
+                                    &nbsp;
+                                    <button type="submit" class="btn btn-danger btn-round text-center" style="background-color:  #FC6180; padding: 6px 6px;" onclick="return fun4();"><i class="ti-trash"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Basic table card end -->
+@section Scripts
+    {
+    <script>
+        function fun4() {
+            if (confirm("Are you sure you want to delete")) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    </script>
+    }

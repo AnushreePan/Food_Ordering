@@ -1,0 +1,40 @@
+﻿@{
+    Layout = "";
+}
+@model Food_Ordering.Areas.Users.Models.UsersModel
+
+<head>
+    <title> UserLogin </title>
+    <link rel="stylesheet" type="text/css" href="~/User/css/userlogin.css">
+</head>
+
+
+<body onload="login_signUp()">
+    <div class="card" id="card">
+        <div class="front">
+            <p class="login_word">LOG IN</p>
+            <img src="https://drive.google.com/uc?export=view&id=1K5_tAX_taOQQ0wwmFx3P--V05kjvg4cu" alt="person picture">
+            <form method="post" asp-area="Users" asp-controller="Users" asp-action="LoginUser">
+                <input type="text" asp-for="Email" placeholder="Email" class="f1" maxlength="50" required autocomplete="off">
+                <input type="Password" asp-for="Password" placeholder="password" class="f1" maxlength="10" required autocomplete="off">
+                <button class="f1" name="login" value="clicked" type="submit">Log in</button>
+                <p>Not registered? <span onclick="flip()">Create an account</span></p>
+            </form>
+        </div>
+        <div class="back">
+            <p class="signup_word">SIGN UP</p>
+            <form method="post" action="" id="signUp">
+                <input type="text" name="first_name" placeholder="first name" class="f1" maxlength="10" required style="margin-top:35px;" autocomplete="off">
+                <input type="text" name="last_name" placeholder="last name" class="f1" maxlength="10" required autocomplete="off">
+                <input type="text" name="username" placeholder="username" class="f1" maxlength="10" required autocomplete="off">
+                <input type="email" name="email" placeholder="e-mail" class="f1" maxlength="30" required autocomplete="off">
+                <input type="password" name="password" placeholder="password" class="f1" maxlength="10" required autocomplete="off">
+                <button class="f1" name="signup" value="clicked">Sign up</button>
+            </form>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+<!-- Required Jquery -->
+<script type="text/javascript" src="~/User/js/userlogin.js"></script>
